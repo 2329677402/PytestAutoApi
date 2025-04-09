@@ -1,0 +1,68 @@
+{
+  "mappings": [
+    {
+         "priority": 1,
+          "request": {
+              "method": "GET",
+              "url": "/repos/appium/appium"
+          },
+          "response": {
+              "body": "{\"full_name\": \"QiucaoTest\"}",
+              "headers": {
+                  "Content-Type": "text/plain"
+              },
+              "status": 200
+          }
+      },
+    {
+          "request": {
+              "method": "POST",
+              "url": "/user/repos"
+          },
+          "response": {
+              "jsonBody": {"message":  "创建了一个demo的repo"},
+              "headers": {
+                  "Content-Type": "application/json"
+              },
+              "status": 201
+          }
+      },
+    {
+          "request": {
+              "method": "PATCH",
+              "urlPattern": "/repos/.*/.*"
+          },
+          "response": {
+              "bodyFileName": "update.json",
+              "headers": {
+                  "Content-Type": "application/json"
+              },
+              "status": 200
+          }
+      },
+    {
+       "scenarioName": "delete repo",
+            "requiredScenarioState": "Started",
+            "newScenarioState": "deleted",
+          "request": {
+              "method": "DELETE",
+              "urlPattern": "/repos/.*/.*"
+          },
+          "response": {
+              "status": 204
+          }
+      },
+    {
+       "scenarioName": "delete repo",
+            "requiredScenarioState": "deleted",
+          "request": {
+              "method": "DELETE",
+              "urlPattern": "/repos/.*/.*"
+          },
+          "response": {
+              "jsonBody": {"message": "Repo已经被删除"},
+              "status": 404
+          }
+      }
+  ]
+}

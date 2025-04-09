@@ -1,0 +1,47 @@
+{
+  "id" : "97fe4148-3457-4f36-97d9-7f9e94c0895e",
+  "name" : "repos_2329677402_2329677402",
+  "request" : {
+    "url" : "/repos/2329677402/2329677402",
+    "method" : "PATCH",
+    "bodyPatterns" : [ {
+      "equalTo" : "{\"description\": \"\\u8fd9\\u662f\\u57ce\\u4e0b\\u79cb\\u8349API\\u8bfe\\u7a0b\\u6f14\\u793a\", \"has_projects\": false, \"has_wiki\": false}",
+      "caseInsensitive" : false
+    } ]
+  },
+  "response" : {
+    "status" : 404,
+    "body" : "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/repos#update-a-repository\",\"status\":\"404\"}",
+    "headers" : {
+      "X-Accepted-OAuth-Scopes" : "repo",
+      "Server" : "github.com",
+      "X-RateLimit-Resource" : "core",
+      "Access-Control-Allow-Origin" : "*",
+      "X-RateLimit-Used" : "2",
+      "X-Content-Type-Options" : "nosniff",
+      "X-RateLimit-Reset" : "1743674457",
+      "x-github-api-version-selected" : "2022-11-28",
+      "Date" : "Thu, 03 Apr 2025 09:17:37 GMT",
+      "Referrer-Policy" : "origin-when-cross-origin, strict-origin-when-cross-origin",
+      "X-Frame-Options" : "deny",
+      "Strict-Transport-Security" : "max-age=31536000; includeSubdomains; preload",
+      "Access-Control-Expose-Headers" : "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset",
+      "X-RateLimit-Remaining" : "4998",
+      "X-GitHub-Media-Type" : "github.v3; format=json",
+      "Content-Security-Policy" : "default-src 'none'",
+      "Vary" : "Accept-Encoding, Accept, X-Requested-With",
+      "X-RateLimit-Limit" : "5000",
+      "X-XSS-Protection" : "0",
+      "X-OAuth-Scopes" : "admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook, admin:ssh_signing_key, audit_log, codespace, copilot, delete:packages, delete_repo, gist, notifications, project, repo, user, workflow, write:discussion, write:network_configurations, write:packages",
+      "github-authentication-token-expiration" : "2025-04-30 16:13:46 UTC",
+      "X-GitHub-Request-Id" : "8EA5:50E36:1AC7527:1B9B10B:67EE5230",
+      "Content-Type" : "application/json; charset=utf-8"
+    }
+  },
+  "uuid" : "97fe4148-3457-4f36-97d9-7f9e94c0895e",
+  "persistent" : true,
+  "scenarioName" : "scenario-1-repos-2329677402-2329677402",
+  "requiredScenarioState" : "Started",
+  "newScenarioState" : "scenario-1-repos-2329677402-2329677402-2",
+  "insertionIndex" : 52
+}

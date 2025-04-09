@@ -1,0 +1,47 @@
+{
+  "id" : "9b2cae27-a76a-44c2-b1e7-fb10794ed8e9",
+  "name" : "user_repos",
+  "request" : {
+    "url" : "/user/repos",
+    "method" : "POST",
+    "bodyPatterns" : [ {
+      "equalTo" : "{\"name\": \"qiucaoTest\", \"auto_init\": true}",
+      "caseInsensitive" : false
+    } ]
+  },
+  "response" : {
+    "status" : 201,
+    "body" : "{\"id\":959738402,\"node_id\":\"R_kgDOOTRyIg\",\"name\":\"qiucaoTest\",\"full_name\":\"2329677402/qiucaoTest\",\"private\":false,\"owner\":{\"login\":\"2329677402\",\"id\":118966016,\"node_id\":\"U_kgDOBxdHAA\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/118966016?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/2329677402\",\"html_url\":\"https://github.com/2329677402\",\"followers_url\":\"https://api.github.com/users/2329677402/followers\",\"following_url\":\"https://api.github.com/users/2329677402/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/2329677402/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/2329677402/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/2329677402/subscriptions\",\"organizations_url\":\"https://api.github.com/users/2329677402/orgs\",\"repos_url\":\"https://api.github.com/users/2329677402/repos\",\"events_url\":\"https://api.github.com/users/2329677402/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/2329677402/received_events\",\"type\":\"User\",\"user_view_type\":\"public\",\"site_admin\":false},\"html_url\":\"https://github.com/2329677402/qiucaoTest\",\"description\":null,\"fork\":false,\"url\":\"https://api.github.com/repos/2329677402/qiucaoTest\",\"forks_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/forks\",\"keys_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/keys{/key_id}\",\"collaborators_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/collaborators{/collaborator}\",\"teams_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/teams\",\"hooks_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/hooks\",\"issue_events_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/issues/events{/number}\",\"events_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/events\",\"assignees_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/assignees{/user}\",\"branches_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/branches{/branch}\",\"tags_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/tags\",\"blobs_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/git/blobs{/sha}\",\"git_tags_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/git/tags{/sha}\",\"git_refs_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/git/refs{/sha}\",\"trees_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/git/trees{/sha}\",\"statuses_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/statuses/{sha}\",\"languages_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/languages\",\"stargazers_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/stargazers\",\"contributors_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/contributors\",\"subscribers_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/subscribers\",\"subscription_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/subscription\",\"commits_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/commits{/sha}\",\"git_commits_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/git/commits{/sha}\",\"comments_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/comments{/number}\",\"issue_comment_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/issues/comments{/number}\",\"contents_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/contents/{+path}\",\"compare_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/compare/{base}...{head}\",\"merges_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/merges\",\"archive_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/{archive_format}{/ref}\",\"downloads_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/downloads\",\"issues_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/issues{/number}\",\"pulls_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/pulls{/number}\",\"milestones_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/milestones{/number}\",\"notifications_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/notifications{?since,all,participating}\",\"labels_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/labels{/name}\",\"releases_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/releases{/id}\",\"deployments_url\":\"https://api.github.com/repos/2329677402/qiucaoTest/deployments\",\"created_at\":\"2025-04-03T09:17:47Z\",\"updated_at\":\"2025-04-03T09:17:47Z\",\"pushed_at\":\"2025-04-03T09:17:47Z\",\"git_url\":\"git://github.com/2329677402/qiucaoTest.git\",\"ssh_url\":\"git@github.com:2329677402/qiucaoTest.git\",\"clone_url\":\"https://github.com/2329677402/qiucaoTest.git\",\"svn_url\":\"https://github.com/2329677402/qiucaoTest\",\"homepage\":null,\"size\":0,\"stargazers_count\":0,\"watchers_count\":0,\"language\":null,\"has_issues\":true,\"has_projects\":true,\"has_downloads\":true,\"has_wiki\":true,\"has_pages\":false,\"has_discussions\":false,\"forks_count\":0,\"mirror_url\":null,\"archived\":false,\"disabled\":false,\"open_issues_count\":0,\"license\":null,\"allow_forking\":true,\"is_template\":false,\"web_commit_signoff_required\":false,\"topics\":[],\"visibility\":\"public\",\"forks\":0,\"open_issues\":0,\"watchers\":0,\"default_branch\":\"main\",\"permissions\":{\"admin\":true,\"maintain\":true,\"push\":true,\"triage\":true,\"pull\":true},\"allow_squash_merge\":true,\"allow_merge_commit\":true,\"allow_rebase_merge\":true,\"allow_auto_merge\":false,\"delete_branch_on_merge\":false,\"allow_update_branch\":false,\"use_squash_pr_title_as_default\":false,\"squash_merge_commit_message\":\"COMMIT_MESSAGES\",\"squash_merge_commit_title\":\"COMMIT_OR_PR_TITLE\",\"merge_commit_message\":\"PR_TITLE\",\"merge_commit_title\":\"MERGE_MESSAGE\",\"network_count\":0,\"subscribers_count\":0}",
+    "headers" : {
+      "X-Accepted-OAuth-Scopes" : "public_repo, repo",
+      "Server" : "github.com",
+      "X-RateLimit-Resource" : "core",
+      "Access-Control-Allow-Origin" : "*",
+      "X-RateLimit-Used" : "3",
+      "x-github-api-version-selected" : "2022-11-28",
+      "Referrer-Policy" : "origin-when-cross-origin, strict-origin-when-cross-origin",
+      "X-Frame-Options" : "deny",
+      "Strict-Transport-Security" : "max-age=31536000; includeSubdomains; preload",
+      "Access-Control-Expose-Headers" : "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset",
+      "X-RateLimit-Remaining" : "4997",
+      "X-GitHub-Media-Type" : "github.v3; format=json",
+      "Content-Security-Policy" : "default-src 'none'",
+      "X-XSS-Protection" : "0",
+      "X-GitHub-Request-Id" : "8CC7:A3078:1A5D983:1B30BC8:67EE523A",
+      "Content-Type" : "application/json; charset=utf-8",
+      "X-Content-Type-Options" : "nosniff",
+      "X-RateLimit-Reset" : "1743674457",
+      "Date" : "Thu, 03 Apr 2025 09:17:47 GMT",
+      "Cache-Control" : "private, max-age=60, s-maxage=60",
+      "ETag" : "\"18d08195a5e41efe910d58706059a7ab3ddbbbdaa69a241da9f73442df6e1a0e\"",
+      "Vary" : "Accept, Authorization, Cookie, X-GitHub-OTP,Accept-Encoding, Accept, X-Requested-With",
+      "X-RateLimit-Limit" : "5000",
+      "X-OAuth-Scopes" : "admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook, admin:ssh_signing_key, audit_log, codespace, copilot, delete:packages, delete_repo, gist, notifications, project, repo, user, workflow, write:discussion, write:network_configurations, write:packages",
+      "github-authentication-token-expiration" : "2025-04-30 16:13:46 UTC",
+      "Location" : "https://api.github.com/repos/2329677402/qiucaoTest"
+    }
+  },
+  "uuid" : "9b2cae27-a76a-44c2-b1e7-fb10794ed8e9",
+  "persistent" : true,
+  "insertionIndex" : 51
+}

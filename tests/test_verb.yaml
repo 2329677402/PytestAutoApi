@@ -1,0 +1,45 @@
+- config:
+    variables:
+      baseurl: https://api.github.com
+      owner: appium
+      repo: appium
+      headers:
+        Content-Type: application/json
+        Authorization: Bearer xxxx
+- test:
+    name: get repo
+    request:
+      url: ${baseurl}/repos/${owner}/${repo}
+      method: GET
+    check:
+      - status_code: 200
+- test:
+    name: create repo
+    request:
+      url: ${baseurl}/user/repos
+      method: POST
+      json:
+        name: qiucaoTest
+        auto_init: true
+    extract:
+      owner: $.owner.login
+      repo: $.name
+    check:
+      - status_code: 201
+- test:
+    name: update repo
+    request:
+      url: ${baseurl}/repos/${owner}/${repo}
+      method: PATCH
+      json:
+        description: 只是一个来自yaml文件repo修改
+        has_wiki: false
+    check:
+      - status_code: 200
+- test:
+    name: delete repo
+    request:
+      url: ${baseurl}/repos/${owner}/${repo}
+      method: DELETE
+    check:
+      - status_code: 204
