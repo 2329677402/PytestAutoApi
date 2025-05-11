@@ -26,7 +26,7 @@ SNAP_PATH = ensure_path_sep('\\snapshots')
 REPORT_PATH = ensure_path_sep('\\report')
 ALLURE_RESULTS = ensure_path_sep('\\report\\allure_results')
 ALLURE_REPORTS = ensure_path_sep('\\report\\allure_reports')
-EXCEL_PATH = ensure_path_sep('\\data\\Excel\\Api_Case_V3.xlsx')
+EXCEL_PATH = ensure_path_sep('\\data\\Excel\\Api_Case_V4.xlsx')
 SHEET_NAME = "Sheet1"
 YAML_PATH = ensure_path_sep('\\data\\Yaml\\api_cases.yaml')
 
@@ -39,7 +39,7 @@ MSG_JSONPATH_EXTRACT_ERROR = "❌变量提取失败，请检查响应数据或JS
 
 # DB
 HOST = "shop-xo.hctestedu.com"
-PORT = "3306"
+PORT = 3306
 DB_USER = "api_test"
 DB_PWD = "Aa9999!"
 DB_NAME = "shopxo_hctested"

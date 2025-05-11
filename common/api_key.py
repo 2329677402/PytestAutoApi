@@ -47,7 +47,7 @@ class ApiKey:
         return value_list[0] if len(value_list) > 0 else None
 
     @allure.step("❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯数据库断言")
-    def sql_check(self, sql):
+    def sql_check(self, sql: str) -> tuple:
         """
         执行SQL语句并返回结果
         :param sql: SQL语句
@@ -62,8 +62,7 @@ class ApiKey:
         )
         cursor = connection.cursor()
         cursor.execute(sql)
-        result = cursor.fetchall()  # 返回第一行数据, Tuple 类型
-        print(result)
+        result = cursor.fetchall()[0]  # 返回第一行数据, Tuple 类型
         cursor.close()
         connection.close()
         return result
@@ -90,3 +89,9 @@ if __name__ == '__main__':
     print(type(res.json()))
     msg = ak.get_value_by_jsonpath(res, "$..msg")
     print(msg)
+    sql_value = "Select username From sxo_user Where username='pocoray';"
+    res = ak.sql_check(sql_value)
+    print(res)
+    print(set(res))
+
+
