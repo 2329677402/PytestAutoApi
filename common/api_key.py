@@ -29,8 +29,8 @@ class ApiKey:
     def post(self, url, data=None, json=None, **kwargs):
         return requests.post(url, data=data, json=json, **kwargs)
 
-    @staticmethod
-    def get_value_by_jsonpath(response: Union[requests.Response, dict], expr: str) -> str:
+    @allure.step("❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯获取响应数据")
+    def get_value_by_jsonpath(self, response: Union[requests.Response, dict], expr: str) -> str:
         """
         通过JSONPath表达式获取响应数据中的文本内容
         :param response: 响应数据
@@ -46,12 +46,16 @@ class ApiKey:
         value_list = jsonpath.jsonpath(response, expr)
         return value_list[0] if len(value_list) > 0 else None
 
-    @allure.step("❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯数据库断言")
+    @allure.step("❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯数据库断言或提取")
     def sql_check(self, sql: str) -> tuple:
         """
         执行SQL语句并返回结果
         :param sql: SQL语句
         :return: SQL执行结果
+        :Usage:
+            ak = ApiKey()
+            res = ak.sql_check("SELECT username FROM table WHERE username='pocoray'")
+            print(res) # ('pocoray',)
         """
         connection = pymysql.connect(
             host=HOST,
@@ -93,5 +97,3 @@ if __name__ == '__main__':
     res = ak.sql_check(sql_value)
     print(res)
     print(set(res))
-
-

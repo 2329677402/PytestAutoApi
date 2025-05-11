@@ -65,6 +65,27 @@ class TestExcelCase:
         except:
             print(MSG_JSONPATH_EXTRACT_ERROR)
 
+    def __sql_extract(self, case_data):
+        """
+        提取SQL响应数据
+        :param case_data: Excel中的用例数据
+        :return: 提取的值
+        """
+        try:
+            if case_data["SQLExpectKey"] and case_data["SQLExpectValue"]:
+                SQLVarList: list = eval(case_data["SQLExpectKey"])
+                SQLValueTuple: tuple = self.ak.sql_check(case_data["SQLExpectValue"])
+
+                for i in range(len(SQLVarList)):
+                    key = SQLVarList[i]
+                    value = SQLValueTuple[i]
+
+                    # 将提取的值存储到all_extract字典中
+                    self.all_extract[key] = value
+                print("当前接口所提取的变量：", self.all_extract)
+        except:
+            print(SQL_EXTRACT_ERROR)
+
     @pytest.mark.parametrize("case_data", AllCaseData)
     def test_case(self, case_data):
         # 动态生成Allure报告数据
@@ -110,7 +131,7 @@ class TestExcelCase:
                     value = MSG_RESULT_PASS
                     print("✅测试通过")
 
-                    # 接口请求成功后，提取变量
+                    # 3. 接口请求成功后，提取响应数据变量
                     self.__json_extract(res, case_data)
                 else:
                     value = MSG_RESULT_FAIL
@@ -119,7 +140,7 @@ class TestExcelCase:
             finally:
                 assert msg == case_data["ExpectResult"]
 
-            # 3. 数据库断言处理
+            # 4. 数据库断言处理
             if case_data["SQLKey"] and case_data["SQLValue"] and case_data["SQLExpectResult"]:
                 try:
                     sqlValue = case_data["SQLValue"]  # SQL 语句
@@ -143,3 +164,13 @@ class TestExcelCase:
                 print("⚠️没有SQL语句需要校验")
                 # value = "⚠️没有SQL语句需要校验"
                 # FileReader.write_excel_from_data(row=row, column=column, value=value)
+
+            # 5. 提取SQL响应数据变量
+            if case_data["SQLExpectKey"] and case_data["SQLExpectValue"]:
+                try:
+                    print("\n❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯提取SQL变量")
+                    self.__sql_extract(case_data)
+                except:
+                    value = SQL_EXECUTE_ERROR
+                    FileReader.write_excel_from_data(row=row, column=column, value=value)
+
