@@ -40,7 +40,9 @@ class FileReader:
         data_for_list = []
         headers = [cell.value for cell in worksheet[2]]
         for row in worksheet.iter_rows(min_row=3, values_only=True):
-            data_for_list.append(dict(zip(headers, row)))
+            current_line = dict(zip(headers, row))
+            if current_line["is_True"] is True:
+                data_for_list.append(dict(zip(headers, row)))
         workbook.close()
         return data_for_list
 

@@ -26,7 +26,7 @@ SNAP_PATH = ensure_path_sep('\\snapshots')
 REPORT_PATH = ensure_path_sep('\\report')
 ALLURE_RESULTS = ensure_path_sep('\\report\\allure_results')
 ALLURE_REPORTS = ensure_path_sep('\\report\\allure_reports')
-EXCEL_PATH = ensure_path_sep('\\data\\Excel\\Api_Case_V6.xlsx')
+EXCEL_PATH = ensure_path_sep('\\data\\Excel\\Api_Case_V7.xlsx')
 SHEET_NAME = "Sheet1"
 YAML_PATH = ensure_path_sep('\\data\\Yaml\\Api_Case_V3.yaml')
 
