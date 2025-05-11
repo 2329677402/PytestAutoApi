@@ -3,7 +3,7 @@
 """
 @Date    : 2025/5/10 01:34
 @Author  : Poco Ray
-@File    : MD5加密.py
+@File    : MD5.py
 @Software: PyCharm
 @Desc    : Description
 """
@@ -19,8 +19,6 @@ def md5_encrypt(text: str) -> str:
     md5 = hashlib.md5()
     md5.update(text.encode('utf-8'))
     return md5.hexdigest()
-
-
 
 
 if __name__ == '__main__':

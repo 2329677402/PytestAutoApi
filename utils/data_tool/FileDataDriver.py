@@ -10,6 +10,8 @@
 import openpyxl
 import yaml
 from config.global_config import EXCEL_PATH, SHEET_NAME, YAML_PATH
+from utils.encrypt_tool.AES import ENCRYPT_AES
+from utils.encrypt_tool.RSA import ENCRYPT_RSA
 
 
 class FileReader:
@@ -113,6 +115,30 @@ class FileReader:
         else:
             return data
 
+    @staticmethod
+    def data_encrypt_by_aes(data: dict):
+        """
+        将传过来的数据进行AES加密并返回, 需要加密的字段以@标识, 若没有@标识则返回原数据
+        :param data: 要加密的数据
+        :return: 加密后的数据
+        :Usage:
+            data = {"@username": "pocoray", "@password": "123456"}
+            result = FileReader.data_encrypt_by_aes(data)
+            print(result)  # {'username': 'k4FQF5PvWs8d+AZKnu1w6g==', 'password': 'mdSm0RmB+xAKrTah3DG31A=='}
+        """
+        new_data = {}
+        # 1. 遍历确定key的第一个字符是否为@, 是则加密
+        # 2. 传过来的数据可能非dict类型
+        try:
+            for key in data:
+                if key[0] == '@':
+                    new_data[key[1:]] = ENCRYPT_AES.encrypt(data[key])
+                else:
+                    new_data[key] = data[key]
+            return new_data
+        except:
+            return None
+
 
 if __name__ == '__main__':
     data1 = FileReader.read_excel_to_dict()
@@ -122,4 +148,7 @@ if __name__ == '__main__':
     all_extract = {"token": "1234567890"}
     Params = {'application': 'app', 'application_client_type': 'weixin', 'token': '{{token}}'}
     result = FileReader.replace_variable_in_yaml(Params, all_extract)
+    print(result)
+    data3 = {"@username": "pocoray", "@password": "123456"}
+    result = FileReader.data_encrypt_by_aes(data3)
     print(result)

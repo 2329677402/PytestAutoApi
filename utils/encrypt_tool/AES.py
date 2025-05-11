@@ -3,17 +3,18 @@
 """
 @Date    : 2025/5/10 01:39
 @Author  : Poco Ray
-@File    : 对称加密.py
+@File    : AES.py
 @Software: PyCharm
 @Desc    : 常用的对称加密算法有AES、DES、3DES、RC4等，pip install pycryptodome
 """
-from Crypto.Cipher import AES
 import base64
+from Crypto.Cipher import AES
+from config.global_config import KEY_AES
 
 
-class EncryptDate:
+class EncryptAES:
 
-    def __init__(self, key: str, length=AES.block_size, encrypt_mode=AES.MODE_ECB):
+    def __init__(self, key: str = KEY_AES, length=AES.block_size, encrypt_mode=AES.MODE_ECB):
         """
         对称加密算法
         :param key: 密钥，长度需为16的倍数
@@ -48,7 +49,7 @@ class EncryptDate:
         return encrypt_text
 
     # AES 算法解密
-    def decrypt(self, encrypt_text:str) -> str:
+    def decrypt(self, encrypt_text: str) -> str:
         """
         :param encrypt_text: 需要解密的加密文本
         :return:
@@ -61,13 +62,13 @@ class EncryptDate:
         count = ord(decrypt_text[-1])  # ord：内置函数，用于将Unicode字符转换为对应的整数
         return decrypt_text[:-count]
 
+ENCRYPT_AES = EncryptAES()
 
 if __name__ == '__main__':
     # 测试
-    aes = EncryptDate('1234567834561111')
-    data = aes.encrypt(str('poco'))
+    data = ENCRYPT_AES.encrypt(str('poco'))
     print(data)
 
     # 解密
-    data = aes.decrypt(data)
+    data = ENCRYPT_AES.decrypt(data)
     print(data)

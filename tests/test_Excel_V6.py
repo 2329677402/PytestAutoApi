@@ -8,9 +8,9 @@
 @Desc    : Description
 """
 import json
-from string import Template
 import allure
 import pytest
+from string import Template
 from common.api_key import ApiKey
 from utils.data_tool.FileDataDriver import FileReader
 from config.global_config import *
@@ -31,7 +31,8 @@ class TestExcelCase:
         :return: Allure标题
         """
         if case_data["CaseName"] is not None:
-            allure.dynamic.title(case_data["CaseName"])
+            caseName = f"ID({case_data['ID']}) - {case_data['CaseName']}"
+            allure.dynamic.title(caseName)
         if case_data["StoryName"] is not None:
             allure.dynamic.story(case_data["StoryName"])
         if case_data["FeatureName"] is not None:
@@ -103,20 +104,23 @@ class TestExcelCase:
         # 1. 读取Excel数据
         try:
             url = case_data["URL"] + case_data["Path"]
-            # 将前一个接口提取的所有变量应用到当前接口的URL的变量中
+            # 将all_extract中的变量应用到当前接口的URL的变量中, 通过 ${var} 来引用, 如: http://www.xxx.com?token=${token}&s=
             new_url = Template(url).substitute(self.all_extract)
 
+            # 其它参数为空时的处理, 避免参数未填写时, 传入None, 导致eval方法解析失败
+            params = eval(case_data["Params"]) if isinstance(case_data["Params"], str) else None
+            headers = eval(case_data["Headers"]) if isinstance(case_data["Headers"], str) else None
             # 处理加密字段数据, 在需要加密的字段前加入@标识, 若没有@标识，则返回原数据
-            data = FileReader.data_encrypt_by_aes(eval(case_data["Data"]))
+            data = FileReader.data_encrypt_by_aes(eval(case_data["Data"])) if isinstance(case_data["Data"],
+                                                                                         str) else None
 
             dict_data = {
                 "url": new_url,
-                "params": eval(case_data["Params"]),
-                "data": data, # 传入加密数据或原数据
-                # "data": eval(case_data["Data"]),  # 转换为dict类型，入参方式支持form-data，但不支持json
-                "headers": eval(case_data["Headers"]),
+                "params": params,
+                "data": data,  # 传入加密数据或原数据
+                "headers": headers,
             }
-            # 增加入参方式为json的处理
+            # 增加入参方式为json的处理, 若data为dict类型, 则入参方式支持form-data，而不支持json
             if case_data["Type"] == "json":
                 dict_data["data"] = json.dumps(dict_data["data"])
 
@@ -133,6 +137,7 @@ class TestExcelCase:
                 print(MSG_JSON_ERROR_02)
                 FileReader.write_excel_from_data(row=row, column=column, value=MSG_JSON_ERROR_02)
             else:
+                # 2.1 单字段断言处理
                 if case_data["ExpectResult"] == msg:
                     value = MSG_RESULT_PASS
                     print("✅测试通过")
@@ -142,6 +147,20 @@ class TestExcelCase:
                 else:
                     value = MSG_RESULT_FAIL
                     print("❌测试失败")
+
+                # 2.2 全量字段断言处理
+                if case_data["ResponseExpect"]:
+                    try:
+                        json1 = eval(case_data["ResponseExpect"])
+                        condition = eval(case_data["ResponseExclude"])
+                        DD_Result = self.ak.json_deepdiff(json1, res.json(), **condition)
+
+                        if DD_Result == {}:
+                            value = MSG_FULL_PASS
+                        else:
+                            value = MSG_FULL_FAIL
+                    except:
+                        print("⚠️不需要进行全量字段断言或数据解析错误")
                 FileReader.write_excel_from_data(row=row, column=column, value=value)
             finally:
                 assert msg == case_data["ExpectResult"]

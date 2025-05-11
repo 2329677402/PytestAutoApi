@@ -14,6 +14,7 @@ import pymysql
 import requests
 from typing import Union
 from config.global_config import *
+from deepdiff import DeepDiff
 
 
 class ApiKey:
@@ -69,6 +70,18 @@ class ApiKey:
         result = cursor.fetchall()[0]  # 返回第一行数据, Tuple 类型
         cursor.close()
         connection.close()
+        return result
+
+    @allure.step("❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯全量数据JSON校验")
+    def json_deepdiff(self, json1, json2, **kwargs):
+        """
+        对比两个JSON数据的差异
+        :param json1:
+        :param json2:
+        :param kwargs: 条件字段, 如: ignore_order(忽略顺序), exclude_paths(排除路径), ignore_string_case(忽略大小写),
+        :return: 如果没有差异, 返回空集合{}; 否则返回差异的内容
+        """
+        result = DeepDiff(json1, json2, **kwargs)
         return result
 
 
