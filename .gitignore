@@ -50,8 +50,10 @@ htmlcov/
 .tox/
 .nox/
 
-# YAML测试文件生成的临时文件
+# 测试文件生成的临时文件
 *.yaml~
+*.yml~
+report/
 
 # 本地配置文件
 *.local

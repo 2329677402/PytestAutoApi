@@ -8,24 +8,58 @@
 @Desc    : Description
 """
 import json
+import logging
 from string import Template
 import jsonpath
 import pytest
 import requests
 import yaml
-from github.githubAPI import GithubAPI
+from common.api_key import ApiKey
+from config.global_config import *
 
 variables = dict()
 
-@pytest.fixture(scope='session')
-def github():
-    base_url = 'https://api.github.com'
-    # base_url = 'http://localhost:8088'
-    token = 'xxx'
-    github_api = GithubAPI(base_url, token)
-    yield github_api
-    github_api.close_session()
 
+@pytest.fixture(scope='session')
+def token_fixture():
+    ak = ApiKey()
+    data = {
+        "url": f"{PROJECT_URL}?s=api/user/login",
+        "params": {
+            "application": "app",
+            "application_client_type": "weixin"
+        },
+        "data": {
+            "accounts": USERNAME,
+            "pwd": PASSWORD,
+            "type": TYPE
+        }
+    }
+    res = ak.post(**data)
+    token = ak.get_value_by_jsonpath(res, "$..token")
+    return ak, token
+
+
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item, call):
+    """
+    pytest钩子函数，获取测试用例的执行结果
+    :param item: 测试用例对象
+    :param call: 测试用例执行结果
+    :return:
+    """
+    out = yield
+    res = out.get_result()
+    if res.when == "call":
+        logging.info(f"🆔用例编号: {res.nodeid}")
+        if res.outcome == "passed":
+            logging.info(f"✅测试结果: {res.outcome}")
+        else:
+            logging.info(f"❌测试结果: {res.outcome}")
+        logging.info(f"🐞故障标识: {res.longrepr}")
+        logging.info(f"⚠️异常信息: {call.excinfo}")
+        logging.info(f"⏱️用例耗时: {res.duration:.2f}秒")
+        logging.info("❯" * 100)
 
 
 def pytest_collect_file(parent, file_path):
@@ -38,7 +72,7 @@ class YamlFile(pytest.File):
         global variables
         print()
         raw = self.fspath.open(encoding="utf-8").read()
-        print('yml原始文件'.center(80,  '-'), '\r\n', raw)
+        print('yml原始文件'.center(80, '-'), '\r\n', raw)
         suite = yaml.safe_load(raw)
 
         for case in suite:
@@ -56,8 +90,8 @@ class YamlItem(pytest.Item):
     def __init__(self, *, spec, **kwargs):
         super().__init__(**kwargs)
         self.spec = spec
-        # self.request = spec.get('request')
-        # self.check = spec.get('check')
+        self.request = spec.get('request')
+        self.check = spec.get('check')
         self.name = spec.get('name')
         self.s = requests.session()
         self.s.headers = variables.get('headers')
@@ -67,7 +101,7 @@ class YamlItem(pytest.Item):
         print()
         test_case = Template(json.dumps(self.spec)).safe_substitute(variables)
         test_case = json.loads(test_case)
-        print('测试用例'.center(80, '-'), '\r\n',test_case)
+        print('测试用例'.center(80, '-'), '\r\n', test_case)
         request_params = test_case.get('request')
         res = self.s.request(**request_params)
         print('响应内容'.center(80, '-'), '\r\n', res.text)
@@ -87,3 +121,16 @@ class YamlItem(pytest.Item):
                     expect = value
                     actual = res.status_code
                     assert expect == actual
+
+@pytest.fixture(autouse=True, scope="session")
+def disable_proxy():
+    # 备份当前的代理设置
+    original_proxies = {key: os.environ.get(key) for key in ['http_proxy', 'https_proxy', 'all_proxy']}
+    # 清除代理设置
+    for key in original_proxies:
+        os.environ.pop(key, None)
+    yield
+    # 恢复原始的代理设置
+    for key, value in original_proxies.items():
+        if value is not None:
+            os.environ[key] = value
