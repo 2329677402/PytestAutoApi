@@ -18,7 +18,7 @@ if __name__ == '__main__':
         os.makedirs(REPORT_PATH)
 
     # 运行pytest并生成报告
-    pytest.main(["-v","./tests/test_Excel_V5.py", f'--alluredir={ALLURE_RESULTS}', '--clean-alluredir'])
+    pytest.main(["-v","./tests/test_Yaml_V3.py", f'--alluredir={ALLURE_RESULTS}', '--clean-alluredir'])
     # 在测试开始运行，执行了--clean-alluredir的命令行参数后，再将environment.properties文件复制到allure-results目录下
     env_path = os.path.join(ALLURE_RESULTS, 'environment.properties')
     shutil.copy("environment.properties", env_path)

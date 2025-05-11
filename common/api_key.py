@@ -29,7 +29,7 @@ class ApiKey:
     def post(self, url, data=None, json=None, **kwargs):
         return requests.post(url, data=data, json=json, **kwargs)
 
-    @allure.step("❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯获取响应数据")
+    @allure.step("❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯提取响应数据变量")
     def get_value_by_jsonpath(self, response: Union[requests.Response, dict], expr: str) -> str:
         """
         通过JSONPath表达式获取响应数据中的文本内容

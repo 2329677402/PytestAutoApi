@@ -28,7 +28,7 @@ ALLURE_RESULTS = ensure_path_sep('\\report\\allure_results')
 ALLURE_REPORTS = ensure_path_sep('\\report\\allure_reports')
 EXCEL_PATH = ensure_path_sep('\\data\\Excel\\Api_Case_V5.xlsx')
 SHEET_NAME = "Sheet1"
-YAML_PATH = ensure_path_sep('\\data\\Yaml\\api_cases.yaml')
+YAML_PATH = ensure_path_sep('\\data\\Yaml\\Api_Case_V3.yaml')
 
 # Message
 MSG_JSON_ERROR_01 = "❌数据解析失败，请检查dict_data数据格式是否正确"
@@ -56,3 +56,4 @@ if __name__ == '__main__':
     print(ALLURE_RESULTS)
     print(ALLURE_REPORTS)
     print(EXCEL_PATH)
+    print(YAML_PATH)

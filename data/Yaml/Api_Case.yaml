@@ -1,0 +1,51 @@
+- ID: 0
+  CaseName: 成功调用登录接口,msg返回登录成功
+  URL: http://shop-xo.hctestedu.com/index.php?s=
+  Path: api/user/login
+  Method: post
+  Params:
+    application: app
+    application_client_type: weixin
+  Headers:
+    Content-Type: multipart/form-data
+  Data:
+    accounts: pocoray
+    pwd: 123456
+    type: username
+  Type: data
+  ActualResult: $..msg
+  ExpectResult: 登录成功
+  Result: null
+  JSONKey: ["token","msg"]
+  JSONValue: ["$..token","$..msg"]
+  RegKey: null
+  RegValue: null
+  StoryName: F01S01_登录
+  FeatureName: F01_用户管理
+  Description: 登录用例
+  Severity: BLOCKER
+
+- ID: 1
+  CaseName: 成功加入购物车, msg返回加入成功
+  URL: http://shop-xo.hctestedu.com/index.php?s=
+  Path: api/cart/save
+  Method: post
+  Params:
+    application: app
+    application_client_type: weixin
+    token: self.all_extract['token']
+  Headers:
+    Content-Type: application/json
+  Data: { "goods_id": "1","sepc": [ { "type": "尺寸","value": "M" } ],"stock": "10" }
+  Type: json
+  ActualResult: $..msg
+  ExpectResult: 加入成功
+  Result: null
+  JSONKey: ["token","msg"]
+  JSONValue: ["$..token","$..msg"]
+  RegKey:
+  RegValue:
+  StoryName: F01S01_购物
+  FeatureName: F01_购物管理
+  Description: 购物车用例
+  Severity: BLOCKER
