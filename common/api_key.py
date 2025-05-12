@@ -31,7 +31,7 @@ class ApiKey:
         return requests.post(url, data=data, json=json, **kwargs)
 
     @allure.step("❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯❯提取响应数据变量")
-    def get_value_by_jsonpath(self, response: Union[requests.Response, dict], expr: str) -> str:
+    def get_value_by_jsonpath(self, response: Union[requests.Response, dict, str], expr: str) -> str:
         """
         通过JSONPath表达式获取响应数据中的文本内容
         :param response: 响应数据
@@ -40,10 +40,15 @@ class ApiKey:
         :Usage:
             ✅get_value_by_jsonpath(res, "$..msg")
             ✅get_value_by_jsonpath(res.json(), "$..msg")
-            ❌get_value_by_jsonpath(res.text, "$..msg")
+            ✅get_value_by_jsonpath(res.text, "$..msg")
         """
         if isinstance(response, requests.Response):
             response = response.json()
+        elif isinstance(response, str):
+            try:
+                response = json.loads(response)
+            except json.JSONDecodeError as e:
+                raise ValueError(f"无法解析 JSON 字符串: {e}")
         value_list = jsonpath.jsonpath(response, expr)
         return value_list[0] if len(value_list) > 0 else None
 
@@ -104,7 +109,7 @@ if __name__ == '__main__':
     print(type(res))
     print(type(res.text))
     print(type(res.json()))
-    msg = ak.get_value_by_jsonpath(res, "$..msg")
+    msg = ak.get_value_by_jsonpath(res.text, "$..msg")
     print(msg)
     sql_value = "Select username From sxo_user Where username='pocoray';"
     res = ak.sql_check(sql_value)

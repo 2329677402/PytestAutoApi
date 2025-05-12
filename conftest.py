@@ -20,24 +20,24 @@ from config.global_config import *
 variables = dict()
 
 
-@pytest.fixture(scope='session')
-def token_fixture():
-    ak = ApiKey()
-    data = {
-        "url": f"{PROJECT_URL}?s=api/user/login",
-        "params": {
-            "application": "app",
-            "application_client_type": "weixin"
-        },
-        "data": {
-            "accounts": USERNAME,
-            "pwd": PASSWORD,
-            "type": TYPE
-        }
-    }
-    res = ak.post(**data)
-    token = ak.get_value_by_jsonpath(res, "$..token")
-    return ak, token
+# @pytest.fixture(scope='session')
+# def token_fixture():
+#     ak = ApiKey()
+#     data = {
+#         "url": f"{PROJECT_URL}?s=api/user/login",
+#         "params": {
+#             "application": "app",
+#             "application_client_type": "weixin"
+#         },
+#         "data": {
+#             "accounts": USERNAME,
+#             "pwd": PASSWORD,
+#             "type": TYPE
+#         }
+#     }
+#     res = ak.post(**data)
+#     token = ak.get_value_by_jsonpath(res, "$..token")
+#     return ak, token
 
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
